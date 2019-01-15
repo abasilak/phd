@@ -1,0 +1,625 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{634A8BD9-A8A6-4511-9B82-0F7246A58B75}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>abasilak</RootNamespace>
+    <AssemblyName>Segmentation-Skinning-Depth Peeling-Trimming</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE;FPS, CPU_PARALLEL</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>x86\Debug\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;peel, AB</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE;CPU_PARALLEL, FPS, peel, KB, AB</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <DocumentationFile>
+    </DocumentationFile>
+    <UseVSHostingProcess>true</UseVSHostingProcess>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>abasilak.Program</StartupObject>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;CPU_PARALLEL, FPS</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <Optimize>false</Optimize>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE;CPU_PARALLEL, FPS, sma</DefineConstants>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="alglibnet2">
+      <HintPath>..\alglibnet2.dll</HintPath>
+    </Reference>
+    <Reference Include="AssimpNet">
+      <HintPath>Release\AssimpNet.dll</HintPath>
+    </Reference>
+    <Reference Include="Cloo">
+      <HintPath>..\Cloo.dll</HintPath>
+    </Reference>
+    <Reference Include="MathNet.Numerics, Version=3.11.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\MathNet.Numerics.3.11.0\lib\net40\MathNet.Numerics.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="MIConvexHullPlugin">
+      <HintPath>..\MIConvexHullPlugin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.VisualBasic" />
+    <Reference Include="OpenTK, Version=1.0.0.0, Culture=neutral, PublicKeyToken=bad199fe84eb3df4, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\OpenTK.dll</HintPath>
+    </Reference>
+    <Reference Include="OpenTK.GLControl, Version=1.0.0.0, Culture=neutral, PublicKeyToken=bad199fe84eb3df4, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\OpenTK.GLControl.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Windows.Forms.DataVisualization" />
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Camera.cs" />
+    <Compile Include="Buffer.cs" />
+    <Compile Include="Blend.cs" />
+    <Compile Include="AnimationGUI.cs" />
+    <Compile Include="AssimpLoadScene.cs" />
+    <Compile Include="Clustering.cs" />
+    <Compile Include="sRGB.cs" />
+    <Compile Include="GeometryCH.cs" />
+    <Compile Include="Performance Form.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Performance Form.Designer.cs">
+      <DependentUpon>Performance Form.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Others.cs" />
+    <Compile Include="Skinning Error Form.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Skinning Error Form.Designer.cs">
+      <DependentUpon>Skinning Error Form.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FPS.cs" />
+    <Compile Include="LSqrDotNet.cs" />
+    <Compile Include="SMA.cs" />
+    <Compile Include="DeformationGradient.cs" />
+    <Compile Include="Kernels.cs" />
+    <Compile Include="Settings.cs" />
+    <Compile Include="Stencil.cs" />
+    <Compile Include="Sampling.cs" />
+    <Compile Include="Logic.cs" />
+    <Compile Include="Sampler.cs" />
+    <Compile Include="Modes.cs" />
+    <Compile Include="Wavefront_OBJ_File.cs" />
+    <Compile Include="VertexArray.cs" />
+    <Compile Include="Transparency.cs" />
+    <Compile Include="Translucency.cs" />
+    <Compile Include="Depth.cs" />
+    <Compile Include="Rendering.cs" />
+    <Compile Include="Scene.cs" />
+    <Compile Include="Query.cs" />
+    <Compile Include="Texture.cs" />
+    <Compile Include="Model.cs" />
+    <Compile Include="Rendering Form.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Rendering Form.Designer.cs">
+      <DependentUpon>Rendering Form.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Light.cs" />
+    <Compile Include="Material.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Content Include="Shaders\data_structs.h" />
+    <Content Include="Shaders\sort_fixed.h" />
+    <Content Include="Shaders\sort_b2.h" />
+    <Content Include="Shaders\heatmap.h" />
+    <Content Include="Shaders\noise.h" />
+    <Content Include="Shaders\resolve_b2.h" />
+    <Content Include="Shaders\sortHeap.h" />
+    <Content Include="Shaders\version.h" />
+    <EmbeddedResource Include="Performance Form.resx">
+      <DependentUpon>Performance Form.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Rendering Form.resx">
+      <DependentUpon>Rendering Form.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Skinning Error Form.resx">
+      <DependentUpon>Skinning Error Form.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <None Include="app.config" />
+    <None Include="ClassDiagram1.cd" />
+    <None Include="Kernels\scan.cl" />
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Shaders\Compute\hello.comp" />
+    <None Include="Shaders\Fragment\aabb-ch\render.frag" />
+    <None Include="Shaders\Compute\prefix_sum.comp" />
+    <None Include="Shaders\Fragment\peeling\ab_ll_bun\depth_bounds_compute.frag" />
+    <None Include="Shaders\Fragment\peeling\ab_ll_sync\peel.frag" />
+    <None Include="Shaders\Fragment\peeling\ab_ll_sync\resolve.frag" />
+    <None Include="Shaders\Fragment\peeling\kb_ll_sync\init.frag" />
+    <None Include="Shaders\Fragment\peeling\ab_ll_storage\peel.frag" />
+    <None Include="Shaders\Fragment\peeling\ab_ll_storage\resolve.frag" />
+    <None Include="Shaders\Fragment\peeling\kb_ll_sync\peel.frag" />
+    <None Include="Shaders\Fragment\peeling\kb_ll_sync\resolve.frag" />
+    <None Include="Shaders\Fragment\peeling\kb_sb_clipping\compute_hash_next.frag" />
+    <None Include="Shaders\Fragment\peeling\kb_sb_clipping\compute_mapping.frag" />
+    <None Include="Shaders\Fragment\peeling\kb_sb_clipping\depth_bounds_clear.frag" />
+    <None Include="Shaders\Fragment\peeling\kb_sb_clipping\depth_bounds_compute.frag" />
+    <None Include="Shaders\Fragment\peeling\kb_sb_clipping\histogram_compute.frag" />
+    <None Include="Shaders\Fragment\peeling\kb_sb_clipping\histogram_resolve.frag" />
+    <None Include="Shaders\Fragment\peeling\kb_sb_clipping\init_depth_counter.frag" />
+    <None Include="Shaders\Fragment\peeling\kb_sb_clipping\peel.frag" />
+    <None Include="Shaders\Fragment\peeling\kb_sb_clipping\resolve.frag" />
+    <None Include="Shaders\Fragment\peeling\kb_ll_clipping\depth_bounds_clear.frag" />
+    <None Include="Shaders\Fragment\peeling\kb_ll_clipping\depth_bounds_compute.frag" />
+    <None Include="Shaders\Fragment\peeling\kb_ll_clipping\histogram_compute.frag" />
+    <None Include="Shaders\Fragment\peeling\kb_ll_clipping\histogram_resolve.frag" />
+    <None Include="Shaders\Fragment\peeling\kb_ll_clipping\init.frag" />
+    <None Include="Shaders\Fragment\peeling\kb_ll_clipping\peel.frag" />
+    <None Include="Shaders\Fragment\peeling\kb_ll_clipping\resolve.frag" />
+    <None Include="Shaders\Fragment\peeling\kb_ab_ll_clipping\depth_bounds_clear.frag" />
+    <None Include="Shaders\Fragment\peeling\kb_ab_ll_clipping\depth_bounds_compute.frag" />
+    <None Include="Shaders\Fragment\peeling\kb_ab_ll_clipping\histogram_compute.frag" />
+    <None Include="Shaders\Fragment\peeling\kb_ab_ll_clipping\histogram_resolve.frag" />
+    <None Include="Shaders\Fragment\peeling\kb_ab_ll_clipping\peel.frag" />
+    <None Include="Shaders\Fragment\peeling\kb_ab_ll_clipping\resolve.frag" />
+    <None Include="Shaders\Fragment\peeling\kb_mdt_64_clipping\depth_bounds_clear.frag" />
+    <None Include="Shaders\Fragment\peeling\kb_mdt_64_clipping\depth_bounds_compute.frag" />
+    <None Include="Shaders\Fragment\peeling\kb_mdt_64_clipping\histogram_compute.frag" />
+    <None Include="Shaders\Fragment\peeling\kb_mdt_64_clipping\histogram_resolve.frag" />
+    <None Include="Shaders\Fragment\peeling\kb_mdt_64_clipping\peel.frag" />
+    <None Include="Shaders\Fragment\peeling\kb_mdt_64_clipping\resolve.frag" />
+    <None Include="Shaders\Fragment\peeling\kb_mdt_32_clipping\depth_bounds_clear.frag" />
+    <None Include="Shaders\Fragment\peeling\kb_mdt_32_clipping\depth_bounds_compute.frag" />
+    <None Include="Shaders\Fragment\peeling\kb_mdt_32_clipping\histogram_compute.frag" />
+    <None Include="Shaders\Fragment\peeling\kb_mdt_32_clipping\histogram_resolve.frag" />
+    <None Include="Shaders\Fragment\peeling\kb_mdt_32_clipping\peel_color.frag" />
+    <None Include="Shaders\Fragment\peeling\kb_mdt_32_clipping\peel_depth.frag" />
+    <None Include="Shaders\Fragment\peeling\kb_mdt_32_clipping\resolve.frag" />
+    <None Include="Shaders\Fragment\peeling\kb_array_max_dynk\peel_depth.frag" />
+    <None Include="Shaders\Fragment\peeling\kb_mdt_64\init.frag" />
+    <None Include="Shaders\Fragment\peeling\kb_mdt_64\peel.frag" />
+    <None Include="Shaders\Fragment\peeling\kb_mdt_64\resolve.frag" />
+    <None Include="Shaders\Fragment\peeling\kb_sb_dynk\blend_counter.frag" />
+    <None Include="Shaders\Fragment\peeling\kb_sb_dynk\compute_hash_next.frag" />
+    <None Include="Shaders\Fragment\peeling\kb_sb_dynk\compute_histogram.frag" />
+    <None Include="Shaders\Fragment\peeling\kb_sb_dynk\compute_mapping.frag" />
+    <None Include="Shaders\Fragment\peeling\kb_sb_dynk\init_depth.frag" />
+    <None Include="Shaders\Fragment\peeling\kb_sb_dynk\peel.frag" />
+    <None Include="Shaders\Fragment\peeling\kb_sb_dynk\resolve.frag" />
+    <None Include="Shaders\Fragment\peeling\kb_array_max_dynk\blend_counter.frag" />
+    <None Include="Shaders\Fragment\peeling\kb_array_max_dynk\compute_histogram.frag" />
+    <None Include="Shaders\Fragment\peeling\kb_array_max_dynk\init.frag" />
+    <None Include="Shaders\Fragment\peeling\kb_array_max_dynk\peel.frag" />
+    <None Include="Shaders\Fragment\peeling\kb_array_max_dynk\resolve.frag" />
+    <None Include="Shaders\Fragment\peeling\kb_sr_clipping\depth_bounds_clear.frag" />
+    <None Include="Shaders\Fragment\peeling\kb_sr_clipping\depth_bounds_compute.frag" />
+    <None Include="Shaders\Fragment\peeling\kb_sr_clipping\histogram_compute.frag" />
+    <None Include="Shaders\Fragment\peeling\kb_sr_clipping\histogram_resolve.frag" />
+    <None Include="Shaders\Fragment\peeling\kb_sr_clipping\peel.frag" />
+    <None Include="Shaders\Fragment\peeling\kb_sr_clipping\resolve.frag" />
+    <None Include="Shaders\Fragment\peeling\kb_clipping\depth_bounds_clear.frag" />
+    <None Include="Shaders\Fragment\peeling\kb_clipping\depth_bounds_compute.frag" />
+    <None Include="Shaders\Fragment\peeling\kb_clipping\histogram_compute.frag" />
+    <None Include="Shaders\Fragment\peeling\kb_clipping\histogram_resolve.frag" />
+    <None Include="Shaders\Fragment\peeling\kb_clipping\peel.frag" />
+    <None Include="Shaders\Fragment\peeling\kb_clipping\resolve.frag" />
+    <None Include="Shaders\Fragment\peeling\kb_array_ins_clipping\depth_bounds_clear.frag" />
+    <None Include="Shaders\Fragment\peeling\kb_array_ins_clipping\depth_bounds_compute.frag" />
+    <None Include="Shaders\Fragment\peeling\kb_array_ins_clipping\histogram_compute.frag" />
+    <None Include="Shaders\Fragment\peeling\kb_array_ins_clipping\histogram_resolve.frag" />
+    <None Include="Shaders\Fragment\peeling\kb_array_ins_clipping\peel.frag" />
+    <None Include="Shaders\Fragment\peeling\kb_array_ins_clipping\resolve.frag" />
+    <None Include="Shaders\Fragment\peeling\kb_faster\init.frag" />
+    <None Include="Shaders\Fragment\peeling\kb_faster\peel.frag" />
+    <None Include="Shaders\Fragment\peeling\kb_faster\resolve.frag" />
+    <None Include="Shaders\Fragment\peeling\kb_sb\blend_counter.frag" />
+    <None Include="Shaders\Fragment\peeling\kb_sb\compute_hash_next.frag" />
+    <None Include="Shaders\Fragment\peeling\kb_sb\compute_mapping.frag" />
+    <None Include="Shaders\Fragment\peeling\kb_sb\peel.frag" />
+    <None Include="Shaders\Fragment\peeling\kb_sb\resolve.frag" />
+    <None Include="Shaders\Fragment\peeling\kb_array_max_v2\init.frag" />
+    <None Include="Shaders\Fragment\peeling\kb_array_max_v2\peel.frag" />
+    <None Include="Shaders\Fragment\peeling\kb_array_max_v2\peel_depth.frag" />
+    <None Include="Shaders\Fragment\peeling\kb_array_max_v2\resolve.frag" />
+    <None Include="Shaders\Fragment\peeling\kb_array_max\peel_depth.frag" />
+    <None Include="Shaders\Fragment\peeling\kb_array_ins\init.frag" />
+    <None Include="Shaders\Fragment\peeling\kb_array_ins\peel.frag" />
+    <None Include="Shaders\Fragment\peeling\kb_array_ins\resolve.frag" />
+    <None Include="Shaders\Fragment\peeling\ab_ll_paged_b2\peel.frag" />
+    <None Include="Shaders\Fragment\peeling\ab_ll_paged_b2\resolve.frag" />
+    <None Include="Shaders\Fragment\peeling\kb_array_max_clipping\histogram_resolve.frag" />
+    <None Include="Shaders\Fragment\peeling\kb_array_max_clipping\histogram_clear.frag" />
+    <None Include="Shaders\Fragment\peeling\kb_array_max_clipping\depth_bounds_clear.frag" />
+    <None Include="Shaders\Fragment\peeling\kb_array_max_clipping\depth_bounds_compute.frag" />
+    <None Include="Shaders\Fragment\peeling\kb_array_max_clipping\histogram_compute.frag" />
+    <None Include="Shaders\Fragment\peeling\kb_array_max_clipping\peel.frag" />
+    <None Include="Shaders\Fragment\peeling\kb_array_max_clipping\resolve.frag" />
+    <None Include="Shaders\Fragment\peeling\kb_array_max\init.frag" />
+    <None Include="Shaders\Fragment\peeling\kb_array_max\peel.frag" />
+    <None Include="Shaders\Fragment\peeling\kb_array_max\resolve.frag" />
+    <None Include="Shaders\Fragment\peeling\kb_ll\init.frag" />
+    <None Include="Shaders\Fragment\peeling\kb_ll\peel.frag" />
+    <None Include="Shaders\Fragment\peeling\kb_ll\resolve.frag" />
+    <None Include="Shaders\Fragment\peeling\kb_ab_sb\blend_counter.frag" />
+    <None Include="Shaders\Fragment\peeling\kb_ab_sb\compute_hash_next.frag" />
+    <None Include="Shaders\Fragment\peeling\kb_ab_sb\compute_mapping.frag" />
+    <None Include="Shaders\Fragment\peeling\kb_ab_sb\peel.frag" />
+    <None Include="Shaders\Fragment\peeling\kb_ab_sb\resolve.frag" />
+    <None Include="Shaders\Fragment\peeling\ab_sb_b2\blend_counter.frag" />
+    <None Include="Shaders\Fragment\peeling\ab_sb_b2\compute_hash_next.frag" />
+    <None Include="Shaders\Fragment\peeling\ab_sb_b2\compute_mapping.frag" />
+    <None Include="Shaders\Fragment\peeling\ab_sb_b2\init_shared_counter.frag" />
+    <None Include="Shaders\Fragment\peeling\ab_sb_b2\peel.frag" />
+    <None Include="Shaders\Fragment\peeling\ab_sb_b2\resolve.frag" />
+    <None Include="Shaders\Fragment\peeling\ab_precalc_fixed\resolve.frag" />
+    <None Include="Shaders\Fragment\peeling\ab_ll_bun\depth_bounds_init.frag" />
+    <None Include="Shaders\Fragment\peeling\ab_ll_bun\peel.frag" />
+    <None Include="Shaders\Fragment\peeling\ab_ll_bun\resolve.frag" />
+    <None Include="Shaders\Fragment\peeling\kb_mdt_32\peel_color.frag" />
+    <None Include="Shaders\Fragment\peeling\kb_mdt_32\init.frag" />
+    <None Include="Shaders\Fragment\peeling\kb_mdt_32\peel_depth.frag" />
+    <None Include="Shaders\Fragment\peeling\kb_mdt_32\resolve.frag" />
+    <None Include="Shaders\Fragment\peeling\kb_ab_ll\peel.frag" />
+    <None Include="Shaders\Fragment\peeling\kb_ab_ll\resolve.frag" />
+    <None Include="Shaders\Fragment\peeling\ab_ll_b2\peel.frag" />
+    <None Include="Shaders\Fragment\peeling\ab_ll_b2\resolve.frag" />
+    <None Include="Shaders\Fragment\peeling\ab_array_b2\peel.frag" />
+    <None Include="Shaders\Fragment\peeling\ab_array_b2\peel_depth.frag" />
+    <None Include="Shaders\Fragment\peeling\ab_array_b2\resolve.frag" />
+    <None Include="Shaders\Fragment\peeling\kb_ab_array\peel.frag" />
+    <None Include="Shaders\Fragment\peeling\kb_ab_array\resolve.frag" />
+    <None Include="Shaders\Fragment\peeling\kb_heap_max\peel.frag" />
+    <None Include="Shaders\Fragment\peeling\kb_heap_max\peel_depth.frag" />
+    <None Include="Shaders\Fragment\peeling\kb_heap_max\resolve.frag" />
+    <None Include="Shaders\Fragment\peeling\ab_ll_paged\peel.frag" />
+    <None Include="Shaders\Fragment\peeling\ab_ll_paged\resolve.frag" />
+    <None Include="Shaders\Fragment\peeling\dual\peel_occlusion.frag" />
+    <None Include="Shaders\Fragment\peeling\f2b\peel_occlusion.frag" />
+    <None Include="Shaders\Fragment\rendering\render_regions.frag" />
+    <None Include="Shaders\Fragment\sphere\render.frag" />
+    <None Include="Shaders\Fragment\image\copy.frag" />
+    <None Include="Shaders\Fragment\image\render_background.frag" />
+    <None Include="Shaders\Fragment\peeling\ab_array\resolve.frag" />
+    <None Include="Shaders\Fragment\peeling\bun\init.frag" />
+    <None Include="Shaders\Fragment\peeling\bun_3p\resolve.frag" />
+    <None Include="Shaders\Fragment\peeling\ab_sb\blend_counter.frag" />
+    <None Include="Shaders\Fragment\peeling\ab_sb\compute_hash_next.frag" />
+    <None Include="Shaders\Fragment\peeling\ab_sb\compute_mapping.frag" />
+    <None Include="Shaders\Fragment\peeling\ab_sb\resolve.frag" />
+    <None Include="Shaders\Fragment\peeling\ab_precalc_opencl\blend_counter.frag" />
+    <None Include="Shaders\Fragment\peeling\ab_precalc_opencl\peel.frag" />
+    <None Include="Shaders\Fragment\peeling\ab_precalc_opencl\resolve.frag" />
+    <None Include="Shaders\Fragment\peeling\ab_precalc_fixed\init_next.frag" />
+    <None Include="Shaders\Fragment\peeling\ab_sb\peel.frag" />
+    <None Include="Shaders\Fragment\peeling\dual_ll\init.frag" />
+    <None Include="Shaders\Fragment\peeling\dual_ll\init_depth.frag" />
+    <None Include="Shaders\Fragment\peeling\dual_ll\peel.frag" />
+    <None Include="Shaders\Fragment\peeling\dual_ll\peel_depth.frag" />
+    <None Include="Shaders\Fragment\peeling\dual_ll\resolve.frag" />
+    <None Include="Shaders\Fragment\peeling\dual_freepipe\init_counter.frag" />
+    <None Include="Shaders\Fragment\peeling\dual_freepipe\init_depth.frag" />
+    <None Include="Shaders\Fragment\peeling\dual_freepipe\peel.frag" />
+    <None Include="Shaders\Fragment\peeling\dual_freepipe\peel_depth.frag" />
+    <None Include="Shaders\Fragment\peeling\dual_freepipe\resolve.frag" />
+    <None Include="Shaders\Fragment\peeling\dual_2p\min_max\blend.frag" />
+    <None Include="Shaders\Fragment\peeling\dual_2p\min_max\init.frag" />
+    <None Include="Shaders\Fragment\peeling\dual_2p\min_max\peel.frag" />
+    <None Include="Shaders\Fragment\peeling\dual_3p\min_max\blend.frag" />
+    <None Include="Shaders\Fragment\peeling\dual_3p\min_max\init.frag" />
+    <None Include="Shaders\Fragment\peeling\dual_3p\min_max\peel_color.frag" />
+    <None Include="Shaders\Fragment\peeling\dual_3p\min_max\peel_depth.frag" />
+    <None Include="Shaders\Fragment\peeling\f2b_ll\init.frag" />
+    <None Include="Shaders\Fragment\peeling\f2b_ll\peel.frag" />
+    <None Include="Shaders\Fragment\peeling\f2b_ll\peel_depth.frag" />
+    <None Include="Shaders\Fragment\peeling\f2b_ll\resolve.frag" />
+    <None Include="Shaders\Fragment\peeling\f2b_freepipe\init.frag" />
+    <None Include="Shaders\Fragment\peeling\f2b_freepipe\peel_depth.frag" />
+    <None Include="Shaders\Fragment\peeling\f2b_freepipe\peel.frag" />
+    <None Include="Shaders\Fragment\peeling\f2b_freepipe\resolve.frag" />
+    <None Include="Shaders\Fragment\peeling\f2b2\peel_depth.frag" />
+    <None Include="Shaders\Fragment\peeling\f2b2\peel_color.frag" />
+    <None Include="Shaders\Fragment\peeling\f2b_kb_array\peel.frag" />
+    <None Include="Shaders\Fragment\peeling\f2b_kb_array\peel_depth.frag" />
+    <None Include="Shaders\Fragment\peeling\f2b_kb_array\resolve.frag" />
+    <None Include="Shaders\Fragment\peeling\f2b_2p\min_max\blend.frag" />
+    <None Include="Shaders\Fragment\peeling\f2b_2p\min_max\init.frag" />
+    <None Include="Shaders\Fragment\peeling\f2b_2p\min_max\peel.frag" />
+    <None Include="Shaders\Fragment\peeling\f2b_3p\max\blend.frag" />
+    <None Include="Shaders\Fragment\peeling\f2b_3p\max\peel_color.frag" />
+    <None Include="Shaders\Fragment\peeling\f2b_3p\max\peel_depth.frag" />
+    <None Include="Shaders\Fragment\peeling\f2b_3p\min_max\blend.frag" />
+    <None Include="Shaders\Fragment\peeling\f2b_3p\min_max\peel_color.frag" />
+    <None Include="Shaders\Fragment\peeling\f2b_3p\min_max\peel_depth.frag" />
+    <None Include="Shaders\Fragment\peeling\ab_precalc_fixed\peel.frag" />
+    <None Include="Shaders\Fragment\rendering\translucency\k_multi_buffer_Z\compute.frag" />
+    <None Include="Shaders\Fragment\trimless\dynamic\2passes\blend.frag" />
+    <None Include="Shaders\Fragment\trimless\static\2passes\blend.frag" />
+    <None Include="Shaders\Fragment\trimless\dynamic\2passes\peel.frag" />
+    <None Include="Shaders\Fragment\trimless\static\2passes\peel.frag" />
+    <None Include="Shaders\Fragment\trimless\static\dual\blend.frag" />
+    <None Include="Shaders\Fragment\trimless\static\dual\init.frag" />
+    <None Include="Shaders\Fragment\trimless\static\dual\locking.frag" />
+    <None Include="Shaders\Fragment\trimless\static\dual\peel.frag" />
+    <None Include="Shaders\Fragment\trimless\static\dual\resolve.frag" />
+    <None Include="Shaders\Fragment\trimless\static\f2b\blend.frag" />
+    <None Include="Shaders\Fragment\trimless\static\f2b\locking.frag" />
+    <None Include="Shaders\Fragment\trimless\static\f2b\resolve.frag" />
+    <None Include="Shaders\Fragment\peeling\ab_array\peel.frag" />
+    <None Include="Shaders\Fragment\peeling\ab_ll\resolve.frag" />
+    <None Include="Shaders\Fragment\peeling\ab_ll\peel.frag" />
+    <None Include="Shaders\Fragment\peeling\bad\resolve_histogram.frag" />
+    <None Include="Shaders\Fragment\peeling\bad\init_histogram.frag" />
+    <None Include="Shaders\Fragment\peeling\bun\init_depth_bounds.frag" />
+    <None Include="Shaders\Fragment\peeling\bun\peel.frag" />
+    <None Include="Shaders\Fragment\peeling\bun\resolve.frag" />
+    <None Include="Shaders\Fragment\peeling\bun_3p\blend.frag" />
+    <None Include="Shaders\Fragment\peeling\bun_3p\init_depth_bounds.frag" />
+    <None Include="Shaders\Fragment\peeling\bun_3p\peel.frag" />
+    <None Include="Shaders\Fragment\peeling\bun_3p\peel_color.frag" />
+    <None Include="Shaders\Fragment\peeling\bad\init_depth_bounds.frag" />
+    <None Include="Shaders\Fragment\peeling\bad\peel.frag" />
+    <None Include="Shaders\Fragment\peeling\bad\resolve_color.frag" />
+    <None Include="Shaders\Fragment\trimless\static\f2b\peel.frag" />
+    <None Include="Shaders\Fragment\peeling\dual_kb_2b\init.frag" />
+    <None Include="Shaders\Fragment\peeling\dual_kb_2b\peel.frag" />
+    <None Include="Shaders\Fragment\peeling\dual_kb_2b\peel_depth.frag" />
+    <None Include="Shaders\Fragment\peeling\dual_kb_2b\resolve.frag" />
+    <None Include="Shaders\Fragment\peeling\kb_sr\peel.frag" />
+    <None Include="Shaders\Fragment\peeling\kb_sr\peel_depth.frag" />
+    <None Include="Shaders\Fragment\peeling\kb_sr\resolve.frag" />
+    <None Include="Shaders\Fragment\peeling\dual_kb_1b\init.frag" />
+    <None Include="Shaders\Fragment\peeling\dual_kb_1b\peel.frag" />
+    <None Include="Shaders\Fragment\peeling\dual_kb_1b\peel_depth.frag" />
+    <None Include="Shaders\Fragment\peeling\dual_kb_1b\resolve.frag" />
+    <None Include="Shaders\Fragment\peeling\f2b_kb\peel.frag" />
+    <None Include="Shaders\Fragment\peeling\f2b_kb\peel_depth.frag" />
+    <None Include="Shaders\Fragment\peeling\f2b_kb\resolve.frag" />
+    <None Include="Shaders\Fragment\peeling\kb\peel_depth.frag" />
+    <None Include="Shaders\Fragment\peeling\kb_multi\peel.frag" />
+    <None Include="Shaders\Fragment\peeling\kb_multi\peel_depth.frag" />
+    <None Include="Shaders\Fragment\peeling\kb_multi\resolve.frag" />
+    <None Include="Shaders\Fragment\peeling\kb_multi_Z\peel.frag" />
+    <None Include="Shaders\Fragment\peeling\kb_multi_Z\peel_depth.frag" />
+    <None Include="Shaders\Fragment\peeling\kb_multi_Z\resolve.frag" />
+    <None Include="Shaders\Fragment\peeling\dual_2p\max\blend.frag" />
+    <None Include="Shaders\Fragment\peeling\dual_2p\max\init.frag" />
+    <None Include="Shaders\Fragment\peeling\dual_2p\max\peel.frag" />
+    <None Include="Shaders\Fragment\peeling\f2b_2p\max\blend.frag" />
+    <None Include="Shaders\Fragment\peeling\f2b_2p\max\init.frag" />
+    <None Include="Shaders\Fragment\peeling\f2b_2p\max\peel.frag" />
+    <None Include="Shaders\Fragment\peeling\kb\resolve.frag" />
+    <None Include="Shaders\Fragment\peeling\kb\peel.frag" />
+    <None Include="Shaders\Fragment\peeling\dual\init_depth.frag" />
+    <None Include="Shaders\Fragment\peeling\dual\peel.frag" />
+    <None Include="Shaders\Fragment\peeling\dual_3p\max\blend.frag" />
+    <None Include="Shaders\Fragment\peeling\dual_3p\max\init.frag" />
+    <None Include="Shaders\Fragment\peeling\dual_3p\max\peel_color.frag" />
+    <None Include="Shaders\Fragment\peeling\dual_3p\max\peel_depth.frag" />
+    <None Include="Shaders\Fragment\rendering\compute_pixel_color.frag" />
+    <None Include="Shaders\Fragment\peeling\f2b\peel.frag" />
+    <None Include="Shaders\Fragment\image\render.frag" />
+    <None Include="Shaders\Fragment\rendering\illumination.frag" />
+    <None Include="Shaders\Fragment\rendering\render.frag" />
+    <None Include="Shaders\Fragment\rendering\translucency\k_stencil_buffer\compute.frag" />
+    <None Include="Shaders\Fragment\rendering\translucency\dual\compute.frag" />
+    <None Include="Shaders\Fragment\rendering\translucency\f2b\compute.frag" />
+    <None Include="Shaders\Fragment\rendering\translucency\compute.frag" />
+    <None Include="Shaders\Fragment\rendering\translucency\k_buffer\compute.frag" />
+    <None Include="Shaders\Fragment\rendering\transparency\average\init.frag" />
+    <None Include="Shaders\Fragment\rendering\transparency\average\render.frag" />
+    <None Include="Shaders\Fragment\rendering\transparency\wsum\dual\render.frag" />
+    <None Include="Shaders\Fragment\rendering\transparency\wsum\f2b\render.frag" />
+    <None Include="Shaders\Fragment\rendering\transparency\wsum\init.frag" />
+    <None Include="Shaders\Fragment\rendering\transparency\wsum\render.frag" />
+    <None Include="Resources\successGreenDot.png" />
+    <None Include="Resources\FormRunHS.png" />
+    <None Include="Resources\PauseHS.png" />
+    <None Include="Resources\StopHS.png" />
+    <None Include="Resources\AddGLSLProg.png" />
+    <None Include="Resources\delete.png" />
+    <None Include="Resources\plus.png" />
+    <None Include="Resources\AddFShader.png" />
+    <None Include="Resources\Pose.png" />
+    <None Include="Resources\MeshPrimary.png" />
+    <None Include="Resources\FShader.png" />
+    <None Include="Resources\Quadrics.png" />
+    <None Include="Resources\VShader.png" />
+    <None Include="Resources\AddExtStub.png" />
+    <None Include="Resources\minus.png" />
+    <Content Include="Shaders\s-buffer.h" />
+    <Content Include="Shaders\resolve.h" />
+    <Content Include="Shaders\sort.h" />
+    <Content Include="Shaders\define.h" />
+    <None Include="Shaders\Fragment\trimming\csg_Z\blend.frag" />
+    <None Include="Shaders\Fragment\trimming\csg_Z\blend_depth.frag" />
+    <None Include="Shaders\Fragment\trimming\csg_Z\init.frag" />
+    <None Include="Shaders\Fragment\trimming\csg_Z\peel.frag" />
+    <None Include="Shaders\Fragment\trimming\csg\blend.frag" />
+    <None Include="Shaders\Fragment\trimming\csg\peel.frag" />
+    <None Include="Shaders\Fragment\trimming\csg\resolve.frag" />
+    <None Include="Shaders\Fragment\trimming\dynamic\blend.frag" />
+    <None Include="Shaders\Fragment\trimming\dynamic\peel_old.frag" />
+    <None Include="Shaders\Fragment\trimming\dynamic\init_overlap.frag" />
+    <None Include="Shaders\Fragment\trimming\dynamic\peel.frag" />
+    <None Include="Shaders\Fragment\trimming\dynamic\resolve.frag" />
+    <None Include="Shaders\Fragment\trimming\static\init_overlap.frag" />
+    <None Include="Shaders\Fragment\trimming\static\resolve.frag" />
+    <None Include="Shaders\Fragment\trimming\static\blend.frag" />
+    <None Include="Shaders\Fragment\trimming\static\peel.frag" />
+    <None Include="Shaders\Geometry\rendering\render_regions.geom" />
+    <None Include="Shaders\Geometry\rendering\render.geom" />
+    <None Include="Shaders\Geometry\trimming\dynamic\peel.geom" />
+    <None Include="Shaders\Tessellation\Control\render.tessCo" />
+    <None Include="Shaders\Tessellation\Evaluation\render.tessEv" />
+    <None Include="Shaders\Vertex\aabb-ch\render.vert" />
+    <None Include="Shaders\Vertex\rendering\render_tess.vert" />
+    <None Include="Shaders\Vertex\rendering\render_regions.vert" />
+    <None Include="Shaders\Vertex\sphere\render.vert" />
+    <None Include="Shaders\Vertex\image\render.vert" />
+    <None Include="Shaders\Vertex\rendering\render.vert" />
+    <None Include="Shaders\Vertex\rendering\translucency\compute.vert" />
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Shader.cs" />
+    <None Include="Shaders\Vertex\trimming\dynamic\render.vert" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.2.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 2.0 %28x86%29</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.0 %28x86%29</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="..\min_cut\$(Configuration)\min_cut.dll">
+      <Link>min_cut.dll</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>copy "$(ProjectDir)Release\min_cut.dll" "$(ProjectDir)bin\$(ConfigurationName)\min_cut.dll"</PostBuildEvent>
+  </PropertyGroup>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

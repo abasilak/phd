@@ -1,0 +1,24 @@
+﻿//#include "version.h"
+
+#version 430 core
+
+layout(binding = 0, r32ui) readonly uniform uimage2DRect image_counter; 
+layout(binding = 1, r32ui) writeonly uniform uimage2DRect image_next; 
+
+uint getPixelFragCounter  (const ivec2 coords)				   {return		imageLoad (image_counter, coords).x;}
+void setPixelNextAddress  (const ivec2 coords, const uint val) {			imageStore(image_next	, coords, uvec4(val, 0U, 0U, 0U) );}
+
+layout (local_size_x = 16, local_size_y = 16) in;
+
+shared float shared_data[gl_WorkGroupSize.x * 2];
+
+void main(void)
+{
+	ivec2 storePos = ivec2(gl_GlobalInvocationID.xy);
+
+	uint counter = getPixelFragCounter(storePos);
+	//if(counter == 0U)
+		setPixelNextAddress (storePos, 1U);
+	//else
+		//setPixelNextAddress (storePos, 0U);
+}

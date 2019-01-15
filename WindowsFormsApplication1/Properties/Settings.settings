@@ -1,0 +1,27 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="abasilak.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="MeshLabLoadPath" Type="System.String" Scope="User">
+      <Value Profile="(Default)">D:\scagja\Animations</Value>
+    </Setting>
+    <Setting Name="MeshLabServerPath" Type="System.String" Scope="User">
+      <Value Profile="(Default)">C:\Program Files\VCG\MeshLab\meshlabserver.exe</Value>
+    </Setting>
+    <Setting Name="MeshLabExtensionsPath" Type="System.String" Scope="User">
+      <Value Profile="(Default)">C:\Program Files\VCG\MeshLab</Value>
+    </Setting>
+    <Setting Name="PoseSequencePath" Type="System.String" Scope="User">
+      <Value Profile="(Default)">D:\scagja\Models</Value>
+    </Setting>
+    <Setting Name="TexturePath" Type="System.String" Scope="User">
+      <Value Profile="(Default)">D:\scagja\Textures</Value>
+    </Setting>
+    <Setting Name="SMALoadPath" Type="System.String" Scope="User">
+      <Value Profile="(Default)">D:\scagja\SMAs</Value>
+    </Setting>
+    <Setting Name="DesktopPath" Type="System.String" Scope="User">
+      <Value Profile="(Default)">C:\Users\Andreas\Desktop\</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

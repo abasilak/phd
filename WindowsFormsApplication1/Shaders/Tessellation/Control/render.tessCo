@@ -1,0 +1,51 @@
+﻿#include "version.h"
+
+layout (vertices = 3) out;
+
+#if slow_rendering
+	in vec4 texCoord_out[];
+	in vec3 stripCoord_out[];
+
+	out vec4 texCoord_EV_out[];
+	out vec3 stripCoord_EV_out[];
+#endif
+
+	 in vec3 pos3_out[];
+	 in vec3 color_out[];
+	 in vec3 normal_out[];
+	 in vec3 instanceColor_out[];
+flat in int  instanceID_out[];
+
+	 out vec3 pos3_EV_out[];
+	 out vec3 color_EV_out[];
+	 out vec3 normal_EV_out[];
+	 out vec3 instanceColor_EV_out[];
+flat out int  instanceID_EV_out[];
+
+uniform float TessLevelInner;
+uniform float TessLevelOuter;
+
+void main()
+{
+    gl_out[gl_InvocationID].gl_Position = gl_in[gl_InvocationID].gl_Position;
+
+	pos3_EV_out		 [gl_InvocationID]		= pos3_out		[gl_InvocationID];
+	normal_EV_out	 [gl_InvocationID]		= normal_out	[gl_InvocationID];
+	color_EV_out	 [gl_InvocationID]		= color_out		[gl_InvocationID];
+	instanceID_EV_out[gl_InvocationID]		= instanceID_out[gl_InvocationID];
+	instanceColor_EV_out[gl_InvocationID]	= instanceColor_out[gl_InvocationID];
+
+#if slow_rendering
+	texCoord_EV_out	 [gl_InvocationID]		= texCoord_out	[gl_InvocationID];
+	stripCoord_EV_out[gl_InvocationID]		= stripCoord_out[gl_InvocationID];
+#endif
+
+    if (gl_InvocationID == 0)
+	{
+        gl_TessLevelInner[0] = TessLevelInner;
+        gl_TessLevelOuter[0] = TessLevelOuter;
+        gl_TessLevelOuter[1] = TessLevelOuter;
+        gl_TessLevelOuter[2] = TessLevelOuter;
+    }
+}
+

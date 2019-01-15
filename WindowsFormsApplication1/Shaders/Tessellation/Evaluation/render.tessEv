@@ -1,0 +1,64 @@
+﻿#include "version.h"
+
+layout(triangles, equal_spacing) in;
+
+layout(binding = 0, std140) uniform Camera
+{
+    mat4 projection_matrix;
+    mat4 modelview_matrix;
+    mat4 normal_matrix;
+};
+
+#if slow_rendering
+	in vec4 texCoord_EV_out[];
+	in vec3 stripCoord_EV_out[];
+
+	out vec4 texCoord_out;
+	out vec3 stripCoord_out;
+#endif
+
+	 in vec3 pos3_EV_out[];
+	 in vec3 color_EV_out[];
+	 in vec3 normal_EV_out[];
+	 in vec3 instanceColor_EV_out[];
+flat in int  instanceID_EV_out[];
+
+	 out vec3 pos3_out;
+	 out vec3 color_out;
+	 out vec3 normal_out;
+	 out vec3 instanceColor_out;
+flat out int  instanceID_out;
+
+void main(void)
+{
+    vec3 pos;
+	pos  = gl_TessCoord.x * gl_in[0].gl_Position.xyz;
+    pos += gl_TessCoord.y * gl_in[1].gl_Position.xyz;
+    pos += gl_TessCoord.z * gl_in[2].gl_Position.xyz;
+    gl_Position = projection_matrix * vec4(pos, 1.0f);
+
+	pos3_out  = gl_TessCoord.x * pos3_EV_out[0];
+    pos3_out += gl_TessCoord.y * pos3_EV_out[1];
+    pos3_out += gl_TessCoord.z * pos3_EV_out[2];
+
+	normal_out  = gl_TessCoord.x * normal_EV_out[0];
+    normal_out += gl_TessCoord.y * normal_EV_out[1];
+    normal_out += gl_TessCoord.z * normal_EV_out[2];
+	normal_out = normalize(normal_out);
+
+	color_out  = gl_TessCoord.x * color_EV_out[0];
+    color_out += gl_TessCoord.y * color_EV_out[1];
+    color_out += gl_TessCoord.z * color_EV_out[2];
+
+	instanceColor_out  = gl_TessCoord.x * instanceColor_EV_out[0];
+	instanceColor_out += gl_TessCoord.y * instanceColor_EV_out[1];
+	instanceColor_out += gl_TessCoord.z * instanceColor_EV_out[2];
+
+	instanceID_out = instanceID_EV_out[0];
+
+#if slow_rendering
+	stripCoord_out  = gl_TessCoord.x * stripCoord_EV_out[0];
+	stripCoord_out += gl_TessCoord.y * stripCoord_EV_out[1];
+	stripCoord_out += gl_TessCoord.z * stripCoord_EV_out[2];
+#endif
+}
